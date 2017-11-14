@@ -599,8 +599,8 @@ m3u8_builder_build_index_playlist(
 			}
 		}
 
-		// ignore zero duration segments (caused by alignment to keyframes)
-		if (cur_item->duration == 0)
+		// ignore zero duration segments (caused by alignment to keyframes) & segment with duration < max_duration
+		if (cur_item->duration < max_segment_duration * 1000)
 		{
 			continue;
 		}
