@@ -271,7 +271,6 @@ m3u8_builder_build_iframe_playlist(
 
 	duration_millis = segment_durations.duration;
 	iframe_length = sizeof("#EXTINF:.000,\n") - 1 + vod_get_int_print_len(vod_div_ceil(duration_millis, 1000)) +
-                (sizeof(m3u8_discontinuity) - 1) +
 		sizeof(byte_range_tag_format) + VOD_INT32_LEN + vod_get_int_print_len(MAX_FRAME_SIZE) - (sizeof("%uD%uD") - 1) +
 		base_url->len + conf->segment_file_name_prefix.len + 1 + vod_get_int_print_len(segment_durations.segment_count) + ctx.name_suffix.len;
 
@@ -290,7 +289,6 @@ m3u8_builder_build_iframe_playlist(
 	}
 
 	// fill out the buffer
-        ctx.p = vod_copy(result->data, m3u8_discontinuity, sizeof(m3u8_discontinuity) -1);
 	ctx.p = vod_copy(result->data, conf->iframes_m3u8_header, conf->iframes_m3u8_header_len);
 
 	if (media_set->sequences[0].video_key_frame_count > 0)
@@ -464,14 +462,14 @@ m3u8_builder_build_index_playlist(
 		sizeof(M3U8_HEADER_VOD) +
 		sizeof(M3U8_HEADER_PART2) + VOD_INT64_LEN + VOD_INT32_LEN +
 		segment_length * segment_durations.segment_count +
-		segment_durations.discontinuities * (sizeof(m3u8_discontinuity) - 1) +
+		segment_durations.segment_count * (sizeof(m3u8_discontinuity) - 1) +
 		(sizeof(m3u8_map_prefix) - 1 +
 		 base_url->len +
 		 conf->init_file_name_prefix.len +
 		 sizeof(m3u8_clip_index) - 1 + VOD_INT32_LEN +
 		 name_suffix.len +
 		 sizeof(m3u8_map_suffix) - 1) *
-		(segment_durations.discontinuities + 1) +
+//		(segment_durations.discontinuities + 1) +
 		sizeof(m3u8_footer);
 
 	if (encryption_type != HLS_ENC_NONE)
@@ -673,7 +671,7 @@ m3u8_builder_build_index_playlist(
 //                p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
 		if (cur_item->discontinuity)
 		{
-			p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
+//			p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
 			if (container_format == HLS_CONTAINER_FMP4 && 
 				cur_item > segment_durations.items &&
 				media_set->initial_clip_index != INVALID_CLIP_INDEX)
@@ -703,6 +701,7 @@ m3u8_builder_build_index_playlist(
 		// write any additional segments
 		for (; segment_index < last_segment_index; segment_index++)
 		{
+                        p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
 			p = vod_copy(p, extinf.data, extinf.len);
 			p = m3u8_builder_append_segment_name(p, segments_base_url, &conf->segment_file_name_prefix, segment_index, &name_suffix);
 		}
