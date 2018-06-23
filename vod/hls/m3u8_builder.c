@@ -271,6 +271,7 @@ m3u8_builder_build_iframe_playlist(
 
 	duration_millis = segment_durations.duration;
 	iframe_length = sizeof("#EXTINF:.000,\n") - 1 + vod_get_int_print_len(vod_div_ceil(duration_millis, 1000)) +
+                (sizeof(m3u8_discontinuity) - 1) +
 		sizeof(byte_range_tag_format) + VOD_INT32_LEN + vod_get_int_print_len(MAX_FRAME_SIZE) - (sizeof("%uD%uD") - 1) +
 		base_url->len + conf->segment_file_name_prefix.len + 1 + vod_get_int_print_len(segment_durations.segment_count) + ctx.name_suffix.len;
 
@@ -289,6 +290,7 @@ m3u8_builder_build_iframe_playlist(
 	}
 
 	// fill out the buffer
+        ctx.p = vod_copy(result->data, m3u8_discontinuity, sizeof(m3u8_discontinuity) -1);
 	ctx.p = vod_copy(result->data, conf->iframes_m3u8_header, conf->iframes_m3u8_header_len);
 
 	if (media_set->sequences[0].video_key_frame_count > 0)
@@ -668,10 +670,10 @@ m3u8_builder_build_index_playlist(
 		segment_index = cur_item->segment_index;
 		last_segment_index = segment_index + cur_item->repeat_count;
 
-                p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
+//                p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
 		if (cur_item->discontinuity)
 		{
-//			p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
+			p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
 			if (container_format == HLS_CONTAINER_FMP4 && 
 				cur_item > segment_durations.items &&
 				media_set->initial_clip_index != INVALID_CLIP_INDEX)
