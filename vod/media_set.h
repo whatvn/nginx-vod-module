@@ -2,7 +2,6 @@
 #define __MEDIA_SET_H__
 
 // includes
-#include "mp4/mp4_aes_ctr.h"
 #include "media_format.h"
 #include "media_clip.h"
 #include "json_parser.h"
@@ -28,6 +27,12 @@ enum {
 	MEDIA_SET_VOD,
 	MEDIA_SET_LIVE,
 };
+
+typedef enum {
+	SEGMENT_TIME_ABSOLUTE,
+	SEGMENT_TIME_END_RELATIVE,
+	SEGMENT_TIME_START_RELATIVE,
+} segment_time_type_t;
 
 // typedefs
 struct segmenter_conf_s;
@@ -109,6 +114,7 @@ typedef struct {
 
 	vod_str_t id;
 	uint32_t type;
+	uint32_t original_type;					// will contain live in case of a live playlist that was forced to vod
 	media_clip_timing_t timing;
 	bool_t original_use_discontinuity;		// will be different than use_discontinuity in case force_continuous_timestamps is enabled
 	bool_t use_discontinuity;
@@ -153,6 +159,7 @@ typedef struct {
 
 typedef struct {
 	int64_t segment_time;		// used in mss
+	segment_time_type_t segment_time_type;
 	uint32_t segment_index;
 	uint32_t clip_index;
 	uint32_t pts_delay;

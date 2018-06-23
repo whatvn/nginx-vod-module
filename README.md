@@ -130,13 +130,13 @@ Debug settings:
 For Debian Wheezy [7], Debian Jessie [8], Ubuntu 14.04 and 14.10, add this repo:
 ```
 # wget -O - http://installrepo.kaltura.org/repo/apt/debian/kaltura-deb.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian mercury main" > /etc/apt/sources.list.d/kaltura.list
+# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/debian naos main" > /etc/apt/sources.list.d/kaltura.list
 ```
 
 For Ubuntu 16.04, 16.10 add this repo:
 ```
 # wget -O - http://installrepo.kaltura.org/repo/apt/xenial/kaltura-deb-256.gpg.key|apt-key add -
-# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial mercury main" > /etc/apt/sources.list.d/kaltura.list
+# echo "deb [arch=amd64] http://installrepo.kaltura.org/repo/apt/xenial naos main" > /etc/apt/sources.list.d/kaltura.list
 ```
 
 Then install the kaltura-nginx package:
@@ -451,6 +451,10 @@ Optional fields:
 * `notifications` - array of notification objects (see below), when a segment is requested,
 	all the notifications that fall between the start/end times of the segment are fired.
 	the notifications must be ordered in an increasing offset order.
+* `clipFrom` - integer, contains a timestamp indicating where the returned stream should start.
+	Setting this parameter is equivalent to passing /clipFrom/ on the URL.
+* `clipTo` - integer, contains a timestamp indicating where the returned stream should end.
+	Setting this parameter is equivalent to passing /clipTo/ on the URL.
 	
 Live fields:
 * `firstClipTime` - integer, mandatory for all live playlists unless `clipTimes` is specified.
@@ -713,15 +717,35 @@ The response of the DRM server is a JSON, with the following format:
 * `iv` - optional base64 encoded initialization vector (128 bit). The IV is currently used only in HLS (FairPlay), 
 	in the other protocols an IV is generated automatically by nginx-vod-module.
 
-##### Sample configuration
+##### Sample configurations
 
-Below is a sample configuration for Apple FairPlay HLS:
+Apple FairPlay HLS:
 ```
 location ~ ^/fpshls/p/\d+/(sp/\d+/)?serveFlavor/entryId/([^/]+)/(.*) {
 	vod hls;
 	vod_hls_encryption_method sample-aes;
 	vod_hls_encryption_key_uri "skd://entry-$2";
 	vod_hls_encryption_key_format "com.apple.streamingkeydelivery";
+	vod_hls_encryption_key_format_versions "1";
+
+	vod_drm_enabled on;
+	vod_drm_request_uri "/udrm/system/ovp/$vod_suburi";
+
+	vod_last_modified_types *;
+	add_header Access-Control-Allow-Headers '*';
+	add_header Access-Control-Expose-Headers 'Server,range,Content-Length,Content-Range';
+	add_header Access-Control-Allow-Methods 'GET, HEAD, OPTIONS';
+	add_header Access-Control-Allow-Origin '*';
+	expires 100d;
+}
+```
+
+Common Encryption HLS:
+```
+location ~ ^/cenchls/p/\d+/(sp/\d+/)?serveFlavor/entryId/([^/]+)/(.*) {
+	vod hls;
+	vod_hls_encryption_method sample-aes-cenc;
+	vod_hls_encryption_key_format "urn:uuid:edef8ba9-79d6-4ace-a3c8-27dcd51d21ed";
 	vod_hls_encryption_key_format_versions "1";
 
 	vod_drm_enabled on;
@@ -831,9 +855,22 @@ If the value is positive, nginx vod returns a range of maximum `vod_live_window_
 If the value is negative, nginx vod returns a range of maximum `-vod_live_window_duration` milliseconds from the end of the mapping json.
 If the value is set to zero, the live manifest will contain all the segments that are fully contained in the mapping json time frame.
 
+#### vod_force_playlist_type_vod
+* **syntax**: `vod_force_playlist_type_vod on/off`
+* **default**: `off`
+* **context**: `http`, `server`, `location`
+
+Generate a vod stream even when the media set has `playlistType=live`. 
+Enabling this setting has the following effects:
+1. Frame timestamps will be continuous and start from zero
+2. Segment indexes will start from one
+3. In case of HLS, the returned manifest will have both `#EXT-X-PLAYLIST-TYPE:VOD` and `#EXT-X-ENDLIST`
+
+This can be useful for clipping vod sections out of a live stream.
+
 #### vod_force_continuous_timestamps
 * **syntax**: `vod_force_continuous_timestamps on/off`
-* **default**: `off
+* **default**: `off`
 * **context**: `http`, `server`, `location`
 
 Generate continuous timestamps even when the media set has gaps (gaps can created by the use of `clipTimes`)
@@ -886,6 +923,15 @@ an HLS manifest will contain #EXTINF:10
 * accurate - reports the exact duration of the segment, taking into account the frame durations, e.g. for a 
 frame rate of 29.97 and 10 second segments it will report the first segment as 10.01. accurate mode also
 takes into account the key frame alignment, in case `vod_align_segments_to_key_frames` is on
+
+### vod_media_set_override_json
+* **syntax**: `vod_media_set_override_json json`
+* **default**: `{}`
+* **context**: `http`, `server`, `location`
+
+This parameter provides a way to override portions of the media set JSON (mapped mode only).
+For example, `vod_media_set_override_json '{"clipTo":20000}'` clips the media set to 20 sec.
+The parameter value can contain variables.
 
 ### Configuration directives - upstream
 
@@ -1437,7 +1483,7 @@ Turning this parameter off reduces the packaging overhead, however the default i
 * **default**: `none`
 * **context**: `http`, `server`, `location`
 
-Sets the encryption method of HLS segments, allowed values are: none (default), aes-128, sample-aes.
+Sets the encryption method of HLS segments, allowed values are: none (default), aes-128, sample-aes, sample-aes-cenc.
 
 #### vod_hls_force_unmuxed_segments
 * **syntax**: `vod_hls_force_unmuxed_segments on/off`
@@ -1474,6 +1520,13 @@ When enabled the server returns absolute segment URLs in media playlist requests
 * **context**: `http`, `server`, `location`
 
 When enabled the server returns absolute segment URLs in iframe playlist requests
+
+#### vod_hls_output_iframes_playlist
+* **syntax**: `vod_hls_output_iframes_playlist on/off`
+* **default**: `on`
+* **context**: `http`, `server`, `location`
+
+When disabled iframe playlists are not returned as part of master playlists
 
 #### vod_hls_master_file_name_prefix
 * **syntax**: `vod_hls_master_file_name_prefix name`

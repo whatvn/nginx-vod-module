@@ -3,8 +3,6 @@
 #include "../media_set.h"
 #include "subtitle_format.h"
 
-#if (VOD_HAVE_LIBXML2)
-
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
@@ -331,6 +329,23 @@ dfxp_get_duration(xmlDoc *doc)
 	return result;
 }
 
+static void
+dfxp_strip_new_lines(u_char* buf, size_t n)
+{
+	u_char* end;
+	u_char* p;
+
+	end = buf + n;
+
+	for (p = buf; p < end; p++)
+	{
+		if (*p == CR || *p == LF)
+		{
+			*p = ' ';
+		}
+	}
+}
+
 // copied from ngx_http_xslt_sax_error
 static void vod_cdecl
 dfxp_xml_sax_error(void *data, const char *msg, ...)
@@ -350,6 +365,8 @@ dfxp_xml_sax_error(void *data, const char *msg, ...)
 	va_end(args);
 
 	while (--n && (buf[n] == CR || buf[n] == LF)) { /* void */ }
+
+	dfxp_strip_new_lines(buf, n);
 
 	vod_log_error(VOD_LOG_ERR, request_context->log, 0,
 		"dfxp_xml_sax_error: libxml2 error: %*s", n + 1, buf);
@@ -373,6 +390,8 @@ dfxp_xml_schema_error(void *data, const char *msg, ...)
 	va_end(args);
 
 	while (--n && (buf[n] == CR || buf[n] == LF)) { /* void */ }
+
+	dfxp_strip_new_lines(buf, n);
 
 	vod_log_error(VOD_LOG_WARN, request_context->log, 0,
 		"dfxp_xml_schema_error: libxml2 error: %*s", n + 1, buf);
@@ -935,18 +954,3 @@ media_format_t dfxp_format = {
 	dfxp_parse,
 	dfxp_parse_frames,
 };
-
-#else
-
-// empty stub
-void
-dfxp_init_process()
-{
-}
-
-void
-dfxp_exit_process()
-{
-}
-
-#endif

@@ -1,16 +1,10 @@
 
-		# internal location for vod subrequests
-		location /kalapi_proxy/ {
-			internal;
-			proxy_pass @PROTOCOL@://kalapi/;
-			proxy_set_header Host $http_host;
-		}
-
 		# base locations
 		include @NGINX_CONF_PATH@/base.conf;
 
 		# serve flavor progressive
-		location ~ ^/p/\d+/(sp/\d+/)?serveFlavor/ {
+		location /pd/ {
+			alias @MEDIA_FILES_PATH@;
 			vod none;
 
 			directio 512;
@@ -20,7 +14,8 @@
 		}
 
 		# serve flavor HLS
-		location ~ ^/hls/p/\d+/(sp/\d+/)?serveFlavor/ {
+		location /hls/ {
+			alias @MEDIA_FILES_PATH@;
 			vod hls;
 			vod_bootstrap_segment_durations 2000;
 			vod_bootstrap_segment_durations 2000;
@@ -31,7 +26,8 @@
 		}
 
 		# serve flavor DASH
-		location ~ ^/dash/p/\d+/(sp/\d+/)?serveFlavor/ {
+		location /dash/ {
+			alias @MEDIA_FILES_PATH@;
 			vod dash;
 			vod_segment_duration 4000;
 			vod_dash_manifest_format segmenttemplate;
@@ -41,7 +37,8 @@
 		}
 
 		# serve flavor HDS
-		location ~ ^/hds/p/\d+/(sp/\d+/)?serveFlavor/ {
+		location /hds/ {
+			alias @MEDIA_FILES_PATH@;
 			vod hds;
 			vod_segment_duration 6000;
 			vod_segment_count_policy last_rounded;
@@ -50,7 +47,8 @@
 		}
 
 		# serve flavor MSS
-		location ~ ^/mss/p/\d+/(sp/\d+/)?serveFlavor/ {
+		location /mss/ {
+			alias @MEDIA_FILES_PATH@;
 			vod mss;
 			vod_segment_duration 4000;
 			vod_manifest_segment_durations_mode accurate;
@@ -61,11 +59,4 @@
 		# static files (crossdomain.xml, robots.txt etc.) + fallback to api
 		location / {
 			root   @STATIC_FILES_PATH@;
-			try_files $uri @api_fallback;
-		}
-
-		# all unidentified requests fallback to api (inc. playManifest)
-		location @api_fallback {
-			proxy_pass @PROTOCOL@://kalapi;
-			proxy_set_header Host $http_host;
 		}

@@ -1,7 +1,4 @@
 #include <ngx_http.h>
-
-#if (NGX_HAVE_LIB_AV_CODEC)
-
 #include "ngx_http_vod_submodule.h"
 #include "ngx_http_vod_utils.h"
 #include "vod/thumb/thumb_grabber.h"
@@ -223,7 +220,7 @@ ngx_http_vod_thumb_parse_dimensions(
 
 	return start_pos;
 }
-#endif //(NGX_HAVE_LIB_SW_SCALE)
+#endif // NGX_HAVE_LIB_SW_SCALE
 
 static ngx_int_t
 ngx_http_vod_thumb_parse_uri_file_name(
@@ -234,7 +231,7 @@ ngx_http_vod_thumb_parse_uri_file_name(
 	request_params_t* request_params,
 	const ngx_http_vod_request_t** request)
 {
-	bool_t negative;
+	segment_time_type_t time_type;
 	int64_t time;
 	ngx_int_t rc;
 
@@ -257,11 +254,21 @@ ngx_http_vod_thumb_parse_uri_file_name(
 		start_pos++;		// skip the -
 	}
 
-	negative = 0;
-	if (start_pos < end_pos && *start_pos == '-')
+	time_type = SEGMENT_TIME_ABSOLUTE;
+	if (start_pos < end_pos)
 	{
-		start_pos++;		// skip the -
-		negative = 1;
+		switch (*start_pos)
+		{
+		case '-':
+			start_pos++;		// skip the -
+			time_type = SEGMENT_TIME_END_RELATIVE;
+			break;
+
+		case '+':
+			start_pos++;		// skip the +
+			time_type = SEGMENT_TIME_START_RELATIVE;
+			break;
+		}
 	}
 
 	if (start_pos >= end_pos || *start_pos < '0' || *start_pos > '9')
@@ -276,11 +283,6 @@ ngx_http_vod_thumb_parse_uri_file_name(
 	{
 		time = time * 10 + *start_pos++ - '0';
 	} while (start_pos < end_pos && *start_pos >= '0' && *start_pos <= '9');
-
-	if (negative)
-	{
-		time = -time;
-	}
 
 	if (time == INVALID_SEGMENT_TIME)
 	{
@@ -297,7 +299,7 @@ ngx_http_vod_thumb_parse_uri_file_name(
 			"ngx_http_vod_thumb_parse_uri_file_name: failed to parse width/height");
 		return ngx_http_vod_status_to_ngx_error(r, VOD_BAD_REQUEST);
 	}
-#endif //(NGX_HAVE_LIB_SW_SCALE)
+#endif // NGX_HAVE_LIB_SW_SCALE
 
 	// parse the required tracks string
 	rc = ngx_http_vod_parse_uri_file_name(r, start_pos, end_pos, 0, request_params);
@@ -309,6 +311,7 @@ ngx_http_vod_thumb_parse_uri_file_name(
 	}
 	
 	request_params->segment_time = time;
+	request_params->segment_time_type = time_type;
 	request_params->tracks_mask[MEDIA_TYPE_AUDIO] = 0;
 	request_params->tracks_mask[MEDIA_TYPE_SUBTITLE] = 0;
 
@@ -327,5 +330,3 @@ ngx_http_vod_thumb_parse_drm_info(
 }
 
 DEFINE_SUBMODULE(thumb);
-
-#endif // (NGX_HAVE_LIB_AV_CODEC)
