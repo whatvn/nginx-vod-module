@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module"
+        name="0">
+      <df name="test">
+        <df name="buffer_cache">
+          <in>main.c</in>
+        </df>
+        <df name="json_parser">
+          <in>main.c</in>
+        </df>
+      </df>
+      <df name="vod">
+        <df name="cli">
+          <in>vod_array.c</in>
+          <in>vod_cli_main.c</in>
+        </df>
+        <df name="dash">
+          <in>dash_packager.c</in>
+          <in>edash_packager.c</in>
+        </df>
+        <df name="filters">
+          <in>audio_decoder.c</in>
+          <in>audio_encoder.c</in>
+          <in>audio_filter.c</in>
+          <in>concat_clip.c</in>
+          <in>dynamic_clip.c</in>
+          <in>filter.c</in>
+          <in>gain_filter.c</in>
+          <in>mix_filter.c</in>
+          <in>rate_filter.c</in>
+          <in>volume_map.c</in>
+        </df>
+        <df name="hds">
+          <in>hds_amf0_encoder.c</in>
+          <in>hds_fragment.c</in>
+          <in>hds_manifest.c</in>
+        </df>
+        <df name="hls">
+          <in>adts_encoder_filter.c</in>
+          <in>aes_cbc_encrypt.c</in>
+          <in>buffer_filter.c</in>
+          <in>eac3_encrypt_filter.c</in>
+          <in>frame_encrypt_filter.c</in>
+          <in>frame_joiner_filter.c</in>
+          <in>hls_muxer.c</in>
+          <in>id3_encoder_filter.c</in>
+          <in>m3u8_builder.c</in>
+          <in>mp4_to_annexb_filter.c</in>
+          <in>mpegts_encoder_filter.c</in>
+          <in>sample_aes_avc_filter.c</in>
+        </df>
+        <df name="input">
+          <in>frames_source_cache.c</in>
+          <in>frames_source_memory.c</in>
+          <in>read_cache.c</in>
+          <in>silence_generator.c</in>
+        </df>
+        <df name="mkv">
+          <in>ebml.c</in>
+          <in>mkv_builder.c</in>
+          <in>mkv_defs.c</in>
+          <in>mkv_format.c</in>
+        </df>
+        <df name="mp4">
+          <in>mp4_aes_ctr.c</in>
+          <in>mp4_cbcs_encrypt.c</in>
+          <in>mp4_cenc_decrypt.c</in>
+          <in>mp4_cenc_encrypt.c</in>
+          <in>mp4_cenc_passthrough.c</in>
+          <in>mp4_clipper.c</in>
+          <in>mp4_format.c</in>
+          <in>mp4_fragment.c</in>
+          <in>mp4_init_segment.c</in>
+          <in>mp4_muxer.c</in>
+          <in>mp4_parser.c</in>
+          <in>mp4_parser_base.c</in>
+        </df>
+        <df name="mss">
+          <in>mss_packager.c</in>
+          <in>mss_playready.c</in>
+        </df>
+        <df name="subtitle">
+          <in>cap_format.c</in>
+          <in>dfxp_format.c</in>
+          <in>subtitle_format.c</in>
+          <in>ttml_builder.c</in>
+          <in>webvtt_builder.c</in>
+          <in>webvtt_format.c</in>
+        </df>
+        <df name="thumb">
+          <in>thumb_grabber.c</in>
+        </df>
+        <in>avc_hevc_parser.c</in>
+        <in>avc_parser.c</in>
+        <in>buffer_pool.c</in>
+        <in>codec_config.c</in>
+        <in>common.c</in>
+        <in>dynamic_buffer.c</in>
+        <in>hevc_parser.c</in>
+        <in>json_parser.c</in>
+        <in>language_code.c</in>
+        <in>manifest_utils.c</in>
+        <in>media_format.c</in>
+        <in>media_set_parser.c</in>
+        <in>parse_utils.c</in>
+        <in>segmenter.c</in>
+        <in>udrm.c</in>
+        <in>write_buffer.c</in>
+        <in>write_buffer_queue.c</in>
+      </df>
+      <in>ngx_async_open_file_cache.c</in>
+      <in>ngx_buffer_cache.c</in>
+      <in>ngx_child_http_request.c</in>
+      <in>ngx_file_reader.c</in>
+      <in>ngx_http_vod_conf.c</in>
+      <in>ngx_http_vod_dash.c</in>
+      <in>ngx_http_vod_hds.c</in>
+      <in>ngx_http_vod_hls.c</in>
+      <in>ngx_http_vod_module.c</in>
+      <in>ngx_http_vod_mss.c</in>
+      <in>ngx_http_vod_request_parse.c</in>
+      <in>ngx_http_vod_status.c</in>
+      <in>ngx_http_vod_submodule.c</in>
+      <in>ngx_http_vod_thumb.c</in>
+      <in>ngx_http_vod_utils.c</in>
+      <in>ngx_http_vod_volume_map.c</in>
+      <in>ngx_perf_counters.c</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module</Elem>
+  </sourceRootList>
+  <projectmakefile></projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module</buildCommandWorkingDir>
+          <buildCommand>echo build</buildCommand>
+          <cleanCommand>echo clean</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_async_open_file_cache.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_buffer_cache.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_child_http_request.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_file_reader.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_conf.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_dash.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_hds.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_hls.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_module.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_mss.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_request_parse.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_status.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_submodule.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_thumb.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_utils.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_http_vod_volume_map.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/ngx_perf_counters.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/test/buffer_cache/main.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/test/json_parser/main.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/avc_hevc_parser.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/avc_parser.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/buffer_pool.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/cli/vod_array.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/cli/vod_cli_main.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/codec_config.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/common.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/dash/dash_packager.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/dash/edash_packager.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/dynamic_buffer.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/filters/audio_decoder.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/filters/audio_encoder.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/filters/audio_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/filters/concat_clip.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/filters/dynamic_clip.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/filters/filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/filters/gain_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/filters/mix_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/filters/rate_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/filters/volume_map.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hds/hds_amf0_encoder.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hds/hds_fragment.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hds/hds_manifest.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hevc_parser.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/adts_encoder_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/aes_cbc_encrypt.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/buffer_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/eac3_encrypt_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/frame_encrypt_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/frame_joiner_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/hls_muxer.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/id3_encoder_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/m3u8_builder.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/mp4_to_annexb_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/mpegts_encoder_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/hls/sample_aes_avc_filter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/input/frames_source_cache.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/input/frames_source_memory.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/input/read_cache.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/input/silence_generator.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/json_parser.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/language_code.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/manifest_utils.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/media_format.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/media_set_parser.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mkv/ebml.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mkv/mkv_builder.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mkv/mkv_defs.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mkv/mkv_format.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_aes_ctr.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_cbcs_encrypt.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_cenc_decrypt.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_cenc_encrypt.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_cenc_passthrough.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_clipper.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_format.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_fragment.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_init_segment.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_muxer.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_parser.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mp4/mp4_parser_base.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mss/mss_packager.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/mss/mss_playready.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/parse_utils.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/segmenter.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/subtitle/cap_format.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/subtitle/dfxp_format.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/subtitle/subtitle_format.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/subtitle/ttml_builder.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/subtitle/webvtt_builder.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/subtitle/webvtt_format.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/thumb/thumb_grabber.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/udrm.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/write_buffer.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/Users/Hung/Documents/Data/NetBeansProjects/nginx-vod-module/vod/write_buffer_queue.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>

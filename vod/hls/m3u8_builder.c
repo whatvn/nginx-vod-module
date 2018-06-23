@@ -668,9 +668,10 @@ m3u8_builder_build_index_playlist(
 		segment_index = cur_item->segment_index;
 		last_segment_index = segment_index + cur_item->repeat_count;
 
+                p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
 		if (cur_item->discontinuity)
 		{
-			p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
+//			p = vod_copy(p, m3u8_discontinuity, sizeof(m3u8_discontinuity) - 1);
 			if (container_format == HLS_CONTAINER_FMP4 && 
 				cur_item > segment_durations.items &&
 				media_set->initial_clip_index != INVALID_CLIP_INDEX)
